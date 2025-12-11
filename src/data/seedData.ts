@@ -1,0 +1,68 @@
+import { JobOffer } from '../types';
+
+export const SEED_JOBS: Omit<JobOffer, 'id'>[] = [
+  {
+    title: 'Desarrollador Full Stack (Remoto)',
+    companyName: 'GlobalTech Solutions',
+    company: 'GlobalTech Solutions',
+    location: 'Remoto - Latinoamérica',
+    salaryMin: 80000,
+    salaryMax: 120000,
+    contractType: 'Full-time',
+    description:
+      'Buscamos un ingeniero Full Stack apasionado con experiencia en TypeScript, React y Node.js para unirse a nuestro equipo global.',
+    postedBy: 'rec_gt',
+    postedAt: new Date(Date.now() - 86400000).toISOString(),
+    keywords: ['react', 'node', 'typescript', 'fullstack'],
+    tags: ['React', 'TypeScript', 'Node.js', 'AWS', 'MongoDB'],
+    source: 'Publicado',
+  },
+  {
+    title: 'Analista de Datos Senior',
+    companyName: 'Data Insights',
+    company: 'Data Insights',
+    location: 'Bogotá, Colombia',
+    salaryMin: 60000,
+    salaryMax: 90000,
+    contractType: 'Contract',
+    description:
+      'Análisis de grandes volúmenes de datos usando Python y SQL. Se requiere experiencia previa en sector financiero.',
+    postedBy: 'rec_di',
+    postedAt: new Date(Date.now() - 345600000).toISOString(),
+    keywords: ['python', 'sql', 'datos', 'senior'],
+    tags: ['Python', 'SQL', 'Tableau', 'Pandas'],
+    source: 'Publicado',
+  },
+  {
+    title: 'Diseñador UX/UI Junior',
+    companyName: 'Creative Design Studio',
+    company: 'Creative Design Studio',
+    location: 'Ciudad de México, México',
+    salaryMin: 35000,
+    salaryMax: 50000,
+    contractType: 'Full-time',
+    description:
+      'Diseño de interfaces centrado en el usuario utilizando Figma y principios de accesibilidad.',
+    postedBy: 'rec_cds',
+    postedAt: new Date(Date.now() - 172800000).toISOString(),
+    keywords: ['ux', 'ui', 'figma', 'diseño', 'junior'],
+    tags: ['Figma', 'Sketch', 'Prototipado', 'UX Research'],
+    source: 'Publicado',
+  },
+  {
+    title: 'Pasante de Ciberseguridad',
+    companyName: 'Security First',
+    company: 'Security First',
+    location: 'Remoto - Global',
+    salaryMin: 18000,
+    salaryMax: 24000,
+    contractType: 'Internship',
+    description:
+      'Asistencia en el monitoreo de redes y análisis de vulnerabilidades. Excelente oportunidad para aprender.',
+    postedBy: 'rec_sf',
+    postedAt: new Date(Date.now() - 604800000).toISOString(),
+    keywords: ['ciberseguridad', 'pasante', 'seguridad'],
+    tags: ['Networking', 'Pen Testing', 'Linux'],
+    source: 'Publicado',
+  },
+];
