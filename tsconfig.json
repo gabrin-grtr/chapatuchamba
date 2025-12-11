@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ES2022",
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+    "types": ["node"],
+    "moduleResolution": "bundler",
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": ["src/*"],
+      "@/components": ["src/components"],
+      "@/screens": ["src/screens"],
+      "@/services": ["src/services"],
+      "@/context": ["src/context"],
+      "@/firebase": ["src/firebase"],
+      "@/config": ["src/config"],
+      "@/constants": ["src/config/constants"],
+      "@/types": ["src/types"],
+      "@/hooks": ["src/hooks"],
+      "@/data": ["src/data"],
+      "@/utils": ["src/utils"]
+    },
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+  "include": [
+    "src",
+    "vite.config.ts",
+    "eslint.config.js",
+    "tailwind.config.js",
+    "lint-staged.config.js"
+  ]
+}

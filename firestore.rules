@@ -1,0 +1,81 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Función para verificar si el usuario está autenticado
+    function isAuth() {
+      return request.auth != null;
+    }
+
+    // Función para verificar si el usuario es propietario
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+
+    // Función para verificar si es admin
+    function isAdmin() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // ==================== USUARIOS ====================
+    match /users/{userId} {
+      // Lectura: El usuario puede leer su propio documento
+      allow read: if isAuth() && isOwner(userId);
+      // Escritura: El usuario puede escribir su propio documento
+      allow write: if isAuth() && isOwner(userId);
+    }
+
+    // ==================== EMPLEOS ====================
+    match /jobs/{jobId} {
+      // Lectura: Cualquier usuario autenticado puede ver empleos
+      allow read: if isAuth();
+      // Escritura: Solo admins o Cloud Functions pueden crear/editar
+      allow write: if isAdmin() || request.auth.uid == null; // null = Cloud Functions
+    }
+
+    // ==================== EMPLEOS GUARDADOS ====================
+    match /savedJobs/{jobId} {
+      // Lectura: El usuario puede ver sus empleos guardados
+      allow read: if isAuth() && isOwner(resource.data.userId);
+      // Escritura: El usuario puede guardar/actualizar sus empleos
+      allow write: if isAuth() && isOwner(request.resource.data.userId);
+    }
+
+    // ==================== EMAILS ====================
+    match /emailLogs/{emailId} {
+      // Lectura: El usuario puede ver sus emails
+      allow read: if isAuth() && isOwner(resource.data.userId);
+      // Escritura: Solo Cloud Functions pueden escribir
+      allow write: if request.auth == null;
+    }
+
+    // ==================== BÚSQUEDAS ====================
+    match /jobSearches/{searchId} {
+      // Lectura: El usuario puede ver sus búsquedas
+      allow read: if isAuth() && isOwner(resource.data.userId);
+      // Escritura: Solo Cloud Functions pueden escribir
+      allow write: if request.auth == null;
+    }
+
+    // ==================== PREFERENCIAS ====================
+    match /preferences/{userId} {
+      // Lectura: El usuario puede leer sus preferencias
+      allow read: if isAuth() && isOwner(userId);
+      // Escritura: El usuario puede actualizar sus preferencias
+      allow write: if isAuth() && isOwner(userId);
+    }
+
+    // ==================== APLICACIONES ====================
+    match /applications/{appId} {
+      // Lectura: El usuario puede ver sus aplicaciones
+      allow read: if isAuth() && isOwner(resource.data.userId);
+      // Escritura: El usuario puede crear/actualizar sus aplicaciones
+      allow write: if isAuth() && isOwner(request.resource.data.userId);
+    }
+
+    // Caso por defecto: denegar todo
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

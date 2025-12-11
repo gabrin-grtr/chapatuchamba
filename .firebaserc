@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "job-match-app",
+    "production": "job-match-production"
+  },
+  "targets": {
+    "job-match-app": {
+      "hosting": [
+        "job-match-app"
+      ]
+    }
+  },
+  "etags": {}
+}
